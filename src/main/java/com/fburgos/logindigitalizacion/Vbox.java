@@ -51,5 +51,6 @@ public class Vbox extends Application {
         scene = new Scene(root, 600, 450);
         stage.setScene(scene);
         stage.show();
+
     }
 }
