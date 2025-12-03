@@ -16,7 +16,7 @@ import java.security.PrivateKey;
 
 public class VideoJuegosApp extends Application {
     private static Scene scene;
-    private int adivina = 0; // Creo una variable para verificar si es igual al aleatorio
+    private int adivina = 1; // Creo una variable para verificar si es igual al aleatorio
     private int numeroAleatorio = (int)(Math.random()*10) +1; // creo una variable para almacenar un numero aleatorio
     public static void main(String[] args) {
         launch();
@@ -34,27 +34,47 @@ public class VideoJuegosApp extends Application {
         root.setMargin(label, new Insets(10, 10, 10, 10));
 
 
-        Label obtener = new Label(" Ingresa un número del 1 al 10 tienes 5 oportunidades " );
+        Label obtener = new Label(" Ingresa un número del 1 al 10 " );
+        obtener.setMaxWidth(Double.MAX_VALUE);
         root.add(obtener, 0, 0, 4, 2);
 
         //Botón enviar
         Button enviar = new Button("Sell");
+        enviar.setMaxWidth(Double.MAX_VALUE);
+        enviar.setMaxHeight(Double.MAX_VALUE);
         root.add(enviar, 0, 5, 4, 2);
         enviar.setOnAction(e -> {
             int num = Integer.parseInt(label.getText());
             if (adivina < 5){
                 adivina ++;
                 if (num == numeroAleatorio){
-                    obtener.setText("En hora buena has adicinado");
+                    obtener.setText("En hora buena has adivinado" );
+                    enviar.setDisable(true); //Desabilito el boton de envíar para que no puedas ingresar mas contenido
                 }
+                if (num < numeroAleatorio){
+                    obtener.setText(" Ingresa un número mayor");
+                    label.clear();
+                }
+                if (num > numeroAleatorio){
+                    obtener.setText("Ingresa un número menor");
+                    label.clear();
+                }
+            }else{
+                obtener.setText("La próxima será mejor, el número es: " + numeroAleatorio);
             }
         });
+
         //Botón reiniciar
         Button reiniciar = new Button("Reboot");
+        reiniciar.setMaxWidth(Double.MAX_VALUE);
+        reiniciar.setMaxHeight(Double.MAX_VALUE);
         root.add(reiniciar, 0, 7, 4, 2);
         reiniciar.setOnAction(e->{
-            label.clear();
-            obtener.setText("");
+            label.clear(); //Limpio el label
+            obtener.setText("Ingresa un ńumero del 1 al 10"); //Vuelvo a colocar el text
+            enviar.setDisable(false); //habilito el botón enviar
+            adivina=0; //Inicializo el adivina en 0
+            numeroAleatorio = (int)(Math.random()*10)+1; //Creo otro número aleatorio
         });
 
         root.setVgap(10);
