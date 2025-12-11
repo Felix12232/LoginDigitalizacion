@@ -31,7 +31,7 @@ public class Calculadora extends Application {
         label.setMaxWidth(Double.MAX_VALUE);
         label.setMaxHeight(Double.MAX_VALUE);
         root.setMargin(label, new Insets(10, 10, 10, 10));
-
+       // label.setOnKeyPressed(e -> System.out.println(" Tecla pulsada: " + e.getCode()));
         // ---- Hacer que las columnas crezcan ----
         for (int i = 0; i < 4; i++) {
             ColumnConstraints col = new ColumnConstraints();
